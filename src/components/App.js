@@ -11,18 +11,23 @@ import FinishScreen from "./FinishScreen";
 import Footer from "./Footer";
 import Timer from "./Timer";
 import { useQuiz } from "../context/QuizContext";
+import data from "./questions.json";
 
 export default function App() {
   const { status, dispatch } = useQuiz();
 
   useEffect(
     function () {
-      fetch("http://localhost:8000/questions")
-        .then((res) => res.json())
-        .then((data) => {
-          dispatch({ type: "dataReceived", payload: data });
-        })
-        .catch((err) => dispatch({ type: "dataFailed" }));
+      // console.log(data);
+      // fetch("./questions.json")
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      dispatch({ type: "dataReceived", payload: data.questions });
+      // })
+      // .catch((err) => {
+      //   console.error(err.message);
+      //   dispatch({ type: "dataFailed" });
+      // });
     },
 
     [dispatch]
